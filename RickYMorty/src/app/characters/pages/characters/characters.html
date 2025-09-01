@@ -1,0 +1,13 @@
+<div class="h-screen overflow grid grid-cols-2 md:grid-cols-5 gap-4 pt-5">
+  @for (character of rickymortyService.characterStatus(); track character.id) {
+  <div class="card" style="width: 18rem;">
+    <img [src]="character.image" class="card-img-top" alt="">
+    <div class="card-body">
+      <h5 class="card-title">{{character.name}}</h5>
+    </div>
+  </div>
+
+  <!-- <button (click)="viewCharacter()"></button> -->
+  }
+
+</div>
