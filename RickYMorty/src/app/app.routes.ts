@@ -4,6 +4,16 @@ export const routes: Routes = [
   {
     path:'characters',
     loadComponent: () =>
-      import('./characters/pages/characters/characters')
+      import('./characters/components/card-list/card-list')
+  },
+  {
+    path:'characters/:id',
+    loadComponent: () =>
+      import('./characters/pages/characters/character')
+  },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./characters/pages/Error404/Error404')
   }
 ];

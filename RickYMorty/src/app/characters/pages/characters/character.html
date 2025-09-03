@@ -1,0 +1,36 @@
+<div class="flex overflow-hidden">
+  <div class="flex-none flex align-items-center justify-content-center font-bold m-2 px-5 py-3 border-round">
+    <section class="text-bg-dark p-3 card" style="width: 18rem;">
+      <img [src]="character()?.image" class="card-img-top" [alt]="character()?.name">
+      <article class="card-body">
+        <h4 class="card-title">Character Info</h4>
+      </article>
+      <ul class="list-group list-group-flush">
+        <li class="text-bg-dark p-3 list-group-item">Name: {{ character()?.name }}</li>
+        <li class="text-bg-dark p-3 list-group-item">
+          Status:
+          <span [ngClass]="changeColorStatus()">{{ changeLanguageStatus() }}</span>
+        </li>
+        <li class="text-bg-dark p-3 list-group-item">Species: {{ character()?.species }}</li>
+        <li class="text-bg-dark p-3 list-group-item">Gender: {{ changeLanguageGender() }}</li>
+        <li class="text-bg-dark p-3 list-group-item">Origin: {{ character()?.origin?.name }}</li>
+        <li class="text-bg-dark p-3 list-group-item">Location: {{ character()?.location?.name }}</li>
+      </ul>
+    </section>
+  </div>
+
+  <p-divider layout="vertical"></p-divider>
+
+  <div class="flex-grow-1 flex align-items justify-content-cente font-bold m-2 px-5 py-3 border-round">
+    <section class="text-bg-dark p-3 card">
+      <h2 class="card-header">
+        List of Episodes appearances
+      </h2>
+      <article class="card-body episode-list-container">
+        @for (episode of episodeNames(); track episode) {
+        <p class="card-text">{{ episode }}</p>
+        }
+      </article>
+    </section>
+  </div>
+</div>

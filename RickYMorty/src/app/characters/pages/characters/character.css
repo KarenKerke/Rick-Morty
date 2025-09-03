@@ -1,0 +1,6 @@
+.episode-list-container {
+  max-height: 500px;
+  width: 800px;
+  overflow-y: auto;
+}
+

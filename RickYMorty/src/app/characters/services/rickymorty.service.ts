@@ -3,6 +3,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import type { RickMortyResponse } from '../interfaces/rickymorty';
 import { CharacterMapper } from '../mapper/character.mapper';
 import { Character } from '../interfaces/character';
+import { forkJoin, map, Observable } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 
@@ -32,4 +33,12 @@ export class RickYMortyService {
     })
   }
 
+  getCharacterById(id: number): Observable<Character> {
+    return this.http.get<Character>(`https://rickandmortyapi.com/api/character/${id}`);
+  }
+
+  loadEpisodes(character: Character) {
+    const requests = character.episode.map(url => this.http.get<any>(url));
+      return forkJoin(requests); 
+  }
 }
