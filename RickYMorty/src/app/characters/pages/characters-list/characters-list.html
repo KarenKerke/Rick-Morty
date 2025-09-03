@@ -1,0 +1,7 @@
+<app-card-list [characters]="characters()"></app-card-list>
+
+<app-paginator
+  [currentPage]="currentPage()"
+  [totalPages]="totalPages()"
+  (pageChange)="onPageChange($event)">
+</app-paginator>

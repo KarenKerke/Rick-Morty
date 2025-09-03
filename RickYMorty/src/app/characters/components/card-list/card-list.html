@@ -1,5 +1,9 @@
 <div class="grid grid-cols-2 md:grid-cols-5 gap-4 pt-5">
   @for (character of characters(); track character.id) {
-    <app-card [id]="character.id" [name]="character.name" [image]="character.image"></app-card>
+    <app-card
+      [id]="character.id"
+      [name]="character.name"
+      [image]="character.image">
+    </app-card>
   }
 </div>

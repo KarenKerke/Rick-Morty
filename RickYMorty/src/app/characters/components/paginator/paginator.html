@@ -1,13 +1,34 @@
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link">Previous</a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#">Next</a>
-    </li>
-  </ul>
-</nav>
+  <section class="pagination flex justify-center gap-2">
+
+    <article>
+      <button
+        class="page-link"
+        [disabled]="currentPage() === 1"
+        (click)="goToPage(currentPage() - 1)">
+        Previous
+      </button>
+    </article>
+
+    @for (page of pagesToDisplay(); track $index) {
+      <article>
+        <button
+          class="page-link"
+          [class.active]="currentPage() === page"
+          [disabled]="page === '...'"
+          (click)="goToPage(page)">
+          {{ page }}
+        </button>
+      </article>
+    }
+
+    <article>
+      <button
+        class="page-link"
+        [disabled]="currentPage() === totalPages()"
+        (click)="goToPage(currentPage() + 1)">
+        Next
+      </button>
+    </article>
+
+  </section>
+

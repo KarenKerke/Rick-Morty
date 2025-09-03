@@ -1,19 +1,12 @@
-import { Component, inject, signal } from '@angular/core';
-import { RickYMortyService } from '../../services/rickymorty.service';
-import type { Character } from '../../interfaces/character';
+import { Component, input } from '@angular/core';
 import Card from '../card/card';
-
+import { Character } from '../../interfaces/character';
 
 @Component({
   selector: 'app-card-list',
   templateUrl: './card-list.html',
   imports: [Card],
 })
-export default class CardList{
-  characters = signal<Character[]>([]);
-  rickymortyService = inject(RickYMortyService);
-
-  ngOnInit() {
-    this.characters.set(this.rickymortyService.characterStatus());
-  }
+export default class CardList {
+  characters = input.required<Character[]>();
 }

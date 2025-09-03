@@ -5,23 +5,24 @@ import { CharacterMapper } from '../mapper/character.mapper';
 import { Character } from '../interfaces/character';
 import { forkJoin, map, Observable } from 'rxjs';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 
 export class RickYMortyService {
   private http = inject(HttpClient);
   characterStatus = signal<Character[]>([]);
   charactersLoading = signal(false);
 
-  constructor(){
+  constructor() {
     this.loadCharacters();
   }
 
-  loadCharacters(){
-    if(this.charactersLoading()) return;
+  loadCharacters(page: number = 1) {
+    if (this.charactersLoading()) return;
     this.charactersLoading.set(true);
 
-    this.http.get<RickMortyResponse>
-    ('https://rickandmortyapi.com/api/character').subscribe(
+    this.http.get<RickMortyResponse>(
+      `https://rickandmortyapi.com/api/character?page=${page}`
+    ).subscribe(
       (resp) => {
         const characters = CharacterMapper.mapCharactersArray(resp.results);
         this.characterStatus.update(currentCharacter => [
@@ -29,9 +30,22 @@ export class RickYMortyService {
           ...characters
         ]);
         this.charactersLoading.set(false);
-        console.log({characters});
-    })
+
+        console.log({ characters, info: resp.info });
+      },
+      (error) => {
+        console.error('Error cargando personajes', error);
+        this.charactersLoading.set(false);
+      }
+    );
   }
+
+  getCharacters(page: number) {
+    return this.http.get<RickMortyResponse>(
+      `https://rickandmortyapi.com/api/character?page=${page}`
+    );
+  }
+
 
   getCharacterById(id: number): Observable<Character> {
     return this.http.get<Character>(`https://rickandmortyapi.com/api/character/${id}`);
@@ -39,6 +53,6 @@ export class RickYMortyService {
 
   loadEpisodes(character: Character) {
     const requests = character.episode.map(url => this.http.get<any>(url));
-      return forkJoin(requests); 
+    return forkJoin(requests);
   }
 }
