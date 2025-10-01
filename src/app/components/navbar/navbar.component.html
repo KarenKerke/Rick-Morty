@@ -1,0 +1,51 @@
+<nav class="navbar">
+  <!-- Left side - Logo and navigation links -->
+  <div class="navbar-left">
+    <a
+      routerLink="/"
+      class="nav-logo"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}">
+      Rick & Morty
+    </a>
+
+    <a
+      routerLink="/characters"
+      class="nav-link"
+      routerLinkActive="active">
+      Characters
+      <span class="badge">84</span>
+    </a>
+
+    <a
+      routerLink="/episodes"
+      class="nav-link"
+      routerLinkActive="active">
+      Episodes
+      <span class="badge">42</span>
+    </a>
+
+    <a
+      routerLink="/locations"
+      class="nav-link"
+      routerLinkActive="active">
+      Locations
+    </a>
+  </div>
+
+  <!-- Right side - Profile and Logout -->
+  <div class="navbar-right">
+    <a
+      routerLink="/profile"
+      class="nav-link"
+      routerLinkActive="active">
+      Profile
+    </a>
+
+    <button
+      class="nav-link logout-btn"
+      (click)="onLogout()">
+      Log Out
+    </button>
+  </div>
+</nav>

@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import type { RickMortyResponse } from '../interfaces/rickymorty';
-import { CharacterMapper } from '../mapper/character.mapper';
-import { Character } from '../interfaces/character';
+import type { RickMortyResponse } from '../interfaces/rickymorty.interface';
+import { CharacterMapper } from '../characters/mapper/character.mapper';
+import { Character } from '../interfaces/character.interface';
 import { forkJoin, map, Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })

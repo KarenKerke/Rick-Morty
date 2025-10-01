@@ -1,0 +1,189 @@
+<div class="register-container">
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="register-form">
+
+    <h1 class="register-title">Register</h1>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="name" class="form-label">Full Name</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          class="form-input"
+          placeholder="Cosme Fulanito"
+          [class.invalid]="formUtils.isValidField(myForm, 'name')"
+        >
+        @if(formUtils.isValidField(myForm, 'name')){
+          <span class="error-message">
+            {{ formUtils.getFieldError(myForm, 'name') }}
+          </span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-input"
+          placeholder="example@example.com"
+          [class.invalid]="formUtils.isValidField(myForm, 'email')"
+        >
+        @if(formUtils.isValidField(myForm, 'email')){
+          <span class="error-message">
+            {{ formUtils.getFieldError(myForm, 'email') }}
+          </span>
+        }
+      </div>
+    </div>
+
+    <!-- Password and Repeat Password - Row 2 -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="password" class="form-label">Password</label>
+        <div class="password-wrapper">
+          <input
+            [type]="hidePassword ? 'password' : 'text'"
+            id="password"
+            formControlName="password"
+            class="form-input"
+            placeholder="••••••••"
+            [class.invalid]="formUtils.isValidField(myForm, 'password')"
+          >
+          <button
+            type="button"
+            class="toggle-password"
+            (click)="togglePasswordVisibility()"
+            aria-label="Toggle password visibility">
+            @if(hidePassword){
+              <span>👁️‍🗨️</span>
+            } @else {
+              <span>👁️</span>
+            }
+          </button>
+        </div>
+        @if(formUtils.isValidField(myForm, 'password')){
+          <span class="error-message">
+            {{ formUtils.getFieldError(myForm, 'password') }}
+          </span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="password2" class="form-label">Repeat Password</label>
+        <div class="password-wrapper">
+          <input
+            [type]="hidePassword2 ? 'password' : 'text'"
+            id="password2"
+            formControlName="password2"
+            class="form-input"
+            placeholder="••••••••"
+            [class.invalid]="formUtils.isValidField(myForm, 'password2')"
+          >
+          <button
+            type="button"
+            class="toggle-password"
+            (click)="togglePassword2Visibility()"
+            aria-label="Toggle password visibility">
+            @if(hidePassword2){
+              <span>👁️‍🗨️</span>
+            } @else {
+              <span>👁️</span>
+            }
+          </button>
+        </div>
+        @if(formUtils.isValidField(myForm, 'password2')){
+          <span class="error-message">
+            {{ formUtils.getFieldError(myForm, 'password2') }}
+          </span>
+        }
+        @if(myForm.hasError('passwordsNotEqual') && myForm.get('password2')?.touched){
+          <span class="error-message">
+            Las contraseñas no coinciden
+          </span>
+        }
+      </div>
+    </div>
+
+    <div class="form-group full-width">
+      <label for="adress" class="form-label">Address</label>
+      <input
+        type="text"
+        id="adress"
+        formControlName="adress"
+        class="form-input"
+        placeholder="Apartment, studio or floor"
+      >
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="city" class="form-label">City</label>
+        <input
+          type="text"
+          id="city"
+          formControlName="city"
+          class="form-input"
+          placeholder="Córdoba"
+          [class.invalid]="getAddressError('city')"
+        >
+        @if(getAddressError('city')){
+          <span class="error-message">
+            La ciudad es obligatoria cuando se ingresa una dirección
+          </span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="country" class="form-label">State</label>
+        <input
+          type="text"
+          id="country"
+          formControlName="country"
+          class="form-input"
+          placeholder="Argentina"
+          [class.invalid]="getAddressError('country')"
+        >
+        @if(getAddressError('country')){
+          <span class="error-message">
+            El país es obligatorio cuando se ingresa una dirección
+          </span>
+        }
+      </div>
+
+      <div class="form-group form-group-small">
+        <label for="zip" class="form-label">Zip</label>
+        <input
+          type="text"
+          id="zip"
+          formControlName="zip"
+          class="form-input"
+          placeholder="5000"
+          [class.invalid]="getAddressError('zip')"
+        >
+        @if(getAddressError('zip')){
+          <span class="error-message">
+            El código postal es obligatorio cuando se ingresa una dirección
+          </span>
+        }
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="btn-submit"
+      [disabled]="isLoading">
+      @if(isLoading){
+        <span>Loading...</span>
+      } @else {
+        <span>Sing Up</span>
+      }
+    </button>
+
+    <div class="link-section">
+      <a routerLink="/login" class="link">Already Signed Up? Sing In</a>
+    </div>
+  </form>
+</div>

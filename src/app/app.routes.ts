@@ -1,26 +1,42 @@
 import { Routes } from '@angular/router';
-import { Component } from '@angular/core';
-import CharactersList from './characters/pages/characters-list/characters-list';
-import Card from './characters/components/card/card';
-import CardList from './characters/components/card-list/card-list';
-import CharacterPage from './characters/pages/characters/character';
+import { noAuthGuard } from './guards/no-auth.guard';
+import { authGuard } from './guards/auth.guard';
+import CharacterPageComponent from './characters/pages/characters/character-page';
 
 export const routes: Routes = [
   {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
+  },
+   {
+    path: 'register',
+    loadComponent: () =>
+      import('./pages/register-page/register-page.component')
+        .then(m => m.RegisterPageComponent),
+    canActivate: [noAuthGuard]
+  },
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./pages/login-page/login-page.component')
+        .then(m => m.LoginPageComponent),
+    canActivate: [noAuthGuard]
+  },
+  {
     path:'characters',
     loadComponent: () =>
-      import('./characters/pages/characters-list/characters-list')
+      import('./characters/pages/characters-list/characters-list-page')
+    .then(m => m.CharactersListPageComponent),
+    canActivate: [authGuard]
   },
   {
     path:'characters/:id',
-    component: CharacterPage
-
-    // loadComponent: () =>
-    //   import('./characters/pages/characters/character')
+    component: CharacterPageComponent
   },
   {
     path: '**',
     loadComponent: () =>
-      import('./characters/pages/Error404/Error404')
+      import('./pages/Error404/Error404')
   }
 ];

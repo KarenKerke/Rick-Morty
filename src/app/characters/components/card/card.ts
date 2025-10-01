@@ -1,6 +1,6 @@
 import { Component, inject, input } from '@angular/core';
 import { Router } from '@angular/router';
-import { RickYMortyService } from '../../services/rickymorty.service';
+import { RickYMortyService } from '../../../services/rickymorty.service';
 
 @Component({
   selector: 'app-card',

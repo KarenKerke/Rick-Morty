@@ -1,16 +1,16 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
-import { RickYMortyService } from '../../services/rickymorty.service';
-import { Character } from '../../interfaces/character';
+import { RickYMortyService } from '../../../services/rickymorty.service';
+import { Character } from '../../../interfaces/character.interface';
 import CardList from '../../components/card-list/card-list';
-import { PaginatorComponent } from '../../components/paginator/paginator';
+import { PaginatorComponent } from '../../../components/paginator/paginator';
 
 
 @Component({
   selector: 'characters-list-page',
-  templateUrl: './characters-list.html',
+  templateUrl: './characters-list-page.html',
   imports: [CardList, PaginatorComponent],
 })
-export default class CharactersList implements OnInit {
+export class CharactersListPageComponent{
   private readonly rickymortyService = inject(RickYMortyService);
 
   characters = signal<Character[]>([]);
