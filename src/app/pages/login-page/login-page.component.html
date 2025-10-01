@@ -1,0 +1,88 @@
+<div class="login-container">
+
+  <div class="image-section">
+    <img src="rick-and-morty.png" alt="Rick and Morty" class="portal-image">
+  </div>
+
+  <div class="form-section">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+
+      <!-- Email Field -->
+      <div class="form-group">
+        <label for="email" class="form-label">Email address</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-input"
+          placeholder="email@example.com"
+          [class.invalid]="formUtils.isValidField(loginForm, 'email')"
+        >
+        @if(formUtils.isValidField(loginForm, 'email')){
+          <span class="error-message">
+            {{ formUtils.getFieldError(loginForm, 'email') }}
+          </span>
+        }
+      </div>
+
+      <!-- Password Field -->
+      <div class="form-group">
+        <label for="password" class="form-label">Password</label>
+        <div class="password-wrapper">
+          <input
+            [type]="hidePassword ? 'password' : 'text'"
+            id="password"
+            formControlName="password"
+            class="form-input"
+            placeholder="Password"
+            [class.invalid]="formUtils.isValidField(loginForm, 'password')"
+          >
+          <button
+            type="button"
+            class="toggle-password"
+            (click)="togglePasswordVisibility()"
+            aria-label="Toggle password visibility">
+            @if(hidePassword){
+              <span>👁️‍🗨️</span>
+            } @else {
+              <span>👁️</span>
+            }
+          </button>
+        </div>
+        @if(formUtils.isValidField(loginForm, 'password')){
+          <span class="error-message">
+            {{ formUtils.getFieldError(loginForm, 'password') }}
+          </span>
+        }
+      </div>
+
+      <!-- Remember me checkbox -->
+      <div class="form-group-checkbox">
+        <input
+          type="checkbox"
+          id="rememberMe"
+          class="checkbox-input"
+        >
+        <label for="rememberMe" class="checkbox-label">Remember me</label>
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="btn-submit"
+        [disabled]="loginForm.invalid || isLoading">
+        @if(isLoading){
+          <span>Loading...</span>
+        } @else {
+          <span>Sign in</span>
+        }
+      </button>
+
+      <!-- Links -->
+      <div class="links-section">
+        <a routerLink="/register" class="link">New around here? Sign up</a>
+        <a routerLink="/forgot-password" class="link">Forgot password?</a>
+      </div>
+    </form>
+  </div>
+</div>

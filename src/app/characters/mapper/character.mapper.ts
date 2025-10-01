@@ -1,5 +1,5 @@
-import { Character } from "../interfaces/character";
-import { Result } from "../interfaces/rickymorty";
+import { Character } from "../../interfaces/character.interface";
+import { Result } from "../../interfaces/rickymorty.interface";
 
 export class CharacterMapper {
   static mapCharacter(item: Result): Character {

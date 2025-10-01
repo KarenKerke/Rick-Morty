@@ -1,17 +1,17 @@
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
-import { RickYMortyService } from '../../services/rickymorty.service';
+import { RickYMortyService } from '../../../services/rickymorty.service';
 import { ActivatedRoute } from '@angular/router';
-import type { Character } from '../../interfaces/character';
+import type { Character } from '../../../interfaces/character.interface';
 import { DividerModule } from 'primeng/divider';
 import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'character',
   imports: [DividerModule, NgClass],
-  templateUrl: './character.html',
-  styleUrl: './character.css'
+  templateUrl: './character-page.html',
+  styleUrl: './character-page.css'
 })
-export default class CharacterPage implements OnInit {
+export default class CharacterPageComponent implements OnInit {
   private readonly rickymortyService = inject(RickYMortyService);
   private readonly route = inject(ActivatedRoute);
   public character = signal<Character | null>(null);
